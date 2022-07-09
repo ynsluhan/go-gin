@@ -14,6 +14,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"path"
 )
 
 var c = make(chan os.Signal, 1)
@@ -52,17 +53,23 @@ func Run(engine *gin.Engine) {
 			Port:   conf.Cloud.Nacos.Port,
 		},
 	}
+	var logDir = conf.Cloud.Nacos.LogDir
+	// 设置nacos日志
+	if len(logDir) == 0 {
+		getwd, _ := os.Getwd()
+		logDir = path.Join(getwd, "nacos", "logs")
+	}
 	// nacos注册配置
 	var namespace = conf.Cloud.Nacos.Namespace
 	var cc = constant.ClientConfig{
 		NamespaceId:         namespace, //namespace id
 		TimeoutMs:           10000,
 		NotLoadCacheAtStart: true,
-		//LogDir:              "/tmp/nacos/log",
+		LogDir:              logDir,
 		//CacheDir:            "/tmp/nacos/cache",
 		//RotateTime: "1h",
 		//MaxAge:     3,
-		LogLevel: "info",
+		LogLevel: conf.Cloud.Nacos.LogLevel,
 	}
 	// 创建服务发现客户端的另一种方式 (推荐)
 	namingClient, err := clients.NewNamingClient(

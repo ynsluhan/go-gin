@@ -92,6 +92,8 @@ github.com/ynsluhan/go-config v1.0.2 h1:AmwO/ZMjmRuGykRSgtjGDnQM22Qa/o4vx5GoZsms
 github.com/ynsluhan/go-config v1.0.2/go.mod h1:Gi/h+0t1K5LGm2wIp5QDPqme7Gf1M+4ET8LfhRt0fO4=
 github.com/ynsluhan/go-config v1.0.4 h1:NUXCVnXWtirxao4sqJrXxc0M9rJMM6kqXxrdGC6w7iA=
 github.com/ynsluhan/go-config v1.0.4/go.mod h1:Gi/h+0t1K5LGm2wIp5QDPqme7Gf1M+4ET8LfhRt0fO4=
+github.com/ynsluhan/go-config v1.0.5 h1:jzU4N22H3eGXqrZHL9f/wYxIOr6HdoXjH0VnQjzG4Ck=
+github.com/ynsluhan/go-config v1.0.5/go.mod h1:Gi/h+0t1K5LGm2wIp5QDPqme7Gf1M+4ET8LfhRt0fO4=
 github.com/ynsluhan/go-new-thread v0.0.0-20210724163200-5784cb6d9576 h1:1JeJ20NajKKxequcim5D1WbiBGNArqaUzxCdhZl3lL0=
 github.com/ynsluhan/go-new-thread v0.0.0-20210724163200-5784cb6d9576/go.mod h1:ZFwLcAtCPtHYvIWtL5+b3c0COcNWVfGNFYs/yhlaut0=
 go.uber.org/atomic v1.6.0/go.mod h1:sABNBOSYdrvTF6hTgEIbc7YasKWGhgEQZyfxyTvoXHQ=
