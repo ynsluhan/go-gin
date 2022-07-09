@@ -61,6 +61,10 @@ func Run(engine *gin.Engine) {
 	}
 	// nacos注册配置
 	var namespace = conf.Cloud.Nacos.Namespace
+	var logLevel = conf.Cloud.Nacos.LogLevel
+	if len(logLevel) == 0 {
+		logLevel = "info"
+	}
 	var cc = constant.ClientConfig{
 		NamespaceId:         namespace, //namespace id
 		TimeoutMs:           10000,
@@ -69,7 +73,7 @@ func Run(engine *gin.Engine) {
 		//CacheDir:            "/tmp/nacos/cache",
 		//RotateTime: "1h",
 		//MaxAge:     3,
-		LogLevel: conf.Cloud.Nacos.LogLevel,
+		LogLevel: logLevel,
 	}
 	// 创建服务发现客户端的另一种方式 (推荐)
 	namingClient, err := clients.NewNamingClient(
@@ -95,12 +99,10 @@ func Run(engine *gin.Engine) {
 		GroupName:   "DEFAULT_GROUP", // 默认值DEFAULT_GROUP
 	})
 	if err != nil {
-		//panic(err)
 		log.Fatalf("[nacos] register error %s", err.Error())
 	}
 	if success {
 		log.Println("[nacos] register success ", success)
-
 	}
 	// 注销端口到nacos
 	go func() {
