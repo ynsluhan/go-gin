@@ -1,4 +1,4 @@
-package engine
+package web
 
 import (
 	"bou.ke/monkey"
