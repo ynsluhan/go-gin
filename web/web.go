@@ -44,7 +44,6 @@ func NewEngine() *gin.Engine {
 	return engine
 }
 
-
 func Run(engine *gin.Engine) {
 	// nacos地址
 	sc := []constant.ServerConfig{
@@ -73,9 +72,7 @@ func Run(engine *gin.Engine) {
 		},
 	)
 	if err != nil {
-		//panic(err)
-		log.Fatalf("注销失败-1：%s", err.Error())
-		os.Exit(0)
+		log.Fatalf("[nacos] register error %s", err.Error())
 	}
 	// 注册端口到nacos
 	success, err := namingClient.RegisterInstance(vo.RegisterInstanceParam{
@@ -92,11 +89,11 @@ func Run(engine *gin.Engine) {
 	})
 	if err != nil {
 		//panic(err)
-		log.Fatalf("注销失败-1：%s", err.Error())
-		os.Exit(0)
+		log.Fatalf("[nacos] register error %s", err.Error())
 	}
 	if success {
-		fmt.Println("注册成功")
+		log.Println("[nacos] register success ", success)
+
 	}
 	// 注销端口到nacos
 	go func() {
@@ -113,11 +110,10 @@ func Run(engine *gin.Engine) {
 			GroupName:   "DEFAULT_GROUP", // 默认值DEFAULT_GROUP
 		})
 		if err != nil {
-			//panic(err)
-			log.Fatalf("注销失败-1：%s", err.Error())
+			log.Fatalf("[nacos] deregister error %s", err.Error())
 		}
 		if res {
-			fmt.Println("注销成功")
+			log.Println("[nacos] deregister success ", res)
 		}
 		os.Exit(0)
 	}()
@@ -131,11 +127,10 @@ func Run(engine *gin.Engine) {
 			GroupName:   "DEFAULT_GROUP", // 默认值DEFAULT_GROUP
 		})
 		if err != nil {
-			//panic(err)
-			log.Fatalf("注销失败-2：%s", err.Error())
+			log.Fatalf("[nacos] deregister error %s", err.Error())
 		}
 		if res1 {
-			log.Println("注销成功")
+			log.Println("[nacos] deregister success ", res1)
 		}
 	}()
 	engine.Run(fmt.Sprintf("%s:%d", conf.Server.Host, conf.Server.Port))
