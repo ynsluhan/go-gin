@@ -11,6 +11,7 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/vo"
 	config "github.com/ynsluhan/go-config"
 	Thread "github.com/ynsluhan/go-new-thread"
+	handler "github.com/ynsluhan/gin-middlewares"
 	"log"
 	"os"
 	"os/signal"
@@ -29,6 +30,13 @@ func init() {
 	})
 }
 
+/**
+* @Author: yNsLuHan
+* @Description: 获取引擎
+* @File: NewEngine
+* @Version: 1.0.0
+* @Date: 2021/6/8 5:05 下午
+ */
 func NewEngine() *gin.Engine {
 	var engine *gin.Engine
 	if conf.Server.Debug {
@@ -45,6 +53,29 @@ func NewEngine() *gin.Engine {
 	return engine
 }
 
+/**
+* @Author: yNsLuHan
+* @Description: 注册中间件
+* @File: 注册中间件
+* @Version: 1.0.0
+* @Date: 2021/6/8 5:05 下午
+ */
+func RegisterMiddleware(engine *gin.Engine, handlerFuncList ...gin.HandlerFunc) {
+	// 注册中间件
+	handler.Middleware(engine)
+	// 自定义注册中间件
+	if len(handlerFuncList) != 0 {
+		engine.Use(handlerFuncList...)
+	}
+}
+
+/**
+* @Author: yNsLuHan
+* @Description: 运行
+* @File: Run
+* @Version: 1.0.0
+* @Date: 2021/6/8 5:05 下午
+ */
 func Run(engine *gin.Engine) {
 	// nacos地址
 	sc := []constant.ServerConfig{
@@ -143,4 +174,17 @@ func Run(engine *gin.Engine) {
 		}
 	}()
 	engine.Run(fmt.Sprintf("%s:%d", conf.Server.Host, conf.Server.Port))
+}
+
+/**
+* @Author: yNsLuHan
+* @Description: 一键启动
+* @File: Start
+* @Version: 1.0.0
+* @Date: 2021/6/8 5:05 下午
+ */
+func Start() {
+	engine := NewEngine()
+	RegisterMiddleware(engine, nil)
+	Run(engine)
 }

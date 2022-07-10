@@ -10,7 +10,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/nacos-group/nacos-sdk-go v1.1.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.2 // indirect
-	github.com/ynsluhan/go-config v1.0.5 // indirect
+	github.com/ynsluhan/gin-middlewares v1.0.0 // indirect
 	github.com/ynsluhan/go-new-thread v0.0.0-20210724163200-5784cb6d9576
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect
 	golang.org/x/net v0.0.0-20220708220712-1185a9018129 // indirect
